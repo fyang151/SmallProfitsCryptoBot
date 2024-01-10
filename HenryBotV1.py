@@ -13,8 +13,8 @@ import base64
 # Fred: a unit of BTC
 
 # API Key and Secret for Kraken account
-apikey = "CmpAK5wvKE/xp/xZbtV2uCZpBwCNYfgQ63avQ7B/vAMkOBS76PkNvtNy"
-apisec = "P/6J9p8BuUDOEOTNwcXVekH85whm2qeuLw8qdd/kDyrhkdfQWweSorHqS9WqBatLb9ucoxvMyPq2gsoan9pgcA=="
+apikey = PLACEHOLDER
+apisec = PLACEHOLDER
 apiurl = "https://api.kraken.com"
 
 # Function to generate Kraken API signature
