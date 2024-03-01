@@ -100,7 +100,6 @@ while True:
 
     expectedValueWithFailSafe = round(myMoney - (2 * fred), 5)
     expectedValue = round(myMoney - fred, 5)
-    margin = 0.0100520676/(fred - 1.0026)
 
     neededBuyMoney = 0
     potentiallyNewBeaver = [fred, "selling", "VIRGIN"]
@@ -116,32 +115,30 @@ while True:
             if thisBeaver[0] < lowest:
                 lowest = thisBeaver[0]
 
-            if (fred / (1.0026 + margin)) > float(thisBeaver[0]) and thisBeaver[1] == "selling":
+            if (fred / 1.015) > float(thisBeaver[0]) and thisBeaver[1] == "selling":
                 sell()
 
                 if thisBeaver in soldThisStep:
                     del cryptoDict[beaver]
                 else:
                     soldThisStep.append(thisBeaver)
-                    cryptoDict[beaver] = [fred, "buying", "promiscuous"]
+                    cryptoDict[beaver] = [(fred / 1.015), "buying", "promiscuous"]
             
                 activity = True
                 myMoney += float(thisBeaver[0])
-                safety += ((fred / (1.0026 + margin)) - float(thisBeaver[0]))
+                safety += ((fred / 1.015) - float(thisBeaver[0]))
             
             elif thisBeaver[1] == "buying":
 
                 neededBuyMoney += thisBeaver[0]
 
-                #i will choose to be pretty lax with the buy orders (not including margins) because i want to buy and sell as quick as possible and the profits lie within the sells
-
-                if (fred * 1.0026) < float(thisBeaver[0]) and expectedValueWithFailSafe > 0:
+                if (fred * 1.015) < float(thisBeaver[0]) and expectedValueWithFailSafe > 0:
                     buy()
 
-                    cryptoDict[beaver] = [fred, "selling", "promiscuous"]
+                    cryptoDict[beaver] = [(fred * 1.015), "selling", "promiscuous"]
 
                     activity = True
-                    myMoney -= (fred * 1.0026)
+                    myMoney -= (fred * 1.015)
         
         #emergency buy: different from the new beaver buy below because this happens when the price of crypto goes REAL LOW and we HAVENT BOUGHT YET!!!!!.... i should think of another solution to this.
         #can only do this once though; if this happens again we are doomed.
